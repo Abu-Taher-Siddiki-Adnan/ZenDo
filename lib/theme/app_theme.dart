@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  // Cyan color palette
   static const Color primaryCyan = Color(0xFF00BCD4);
   static const Color lightCyan = Color(0xFF62EBFF);
   static const Color darkCyan = Color(0xFF008BA3);
@@ -11,7 +10,6 @@ class AppTheme {
   static const Color textColorLight = Color(0xFF263238);
   static const Color textColorDark = Color(0xFFECEFF1);
 
-  // Beautiful cyan gradient
   static BoxDecoration get gradientBoxDecoration {
     return BoxDecoration(
       gradient: LinearGradient(

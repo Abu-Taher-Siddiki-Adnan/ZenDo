@@ -7,6 +7,7 @@ import 'package:ZenDo/models/task.dart';
 import 'package:ZenDo/theme/app_theme.dart';
 import 'developer_screen.dart';
 import 'profile_screen.dart';
+import 'package:ZenDo/utils/responsive.dart'; 
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -20,40 +21,61 @@ class SettingsScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: const Text("Settings", style: TextStyle(color: Colors.white)),
+          title: Text(
+            "Settings", 
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: Responsive.textSize(18, context),
+            )
+          ),
           backgroundColor: Colors.transparent,
           elevation: 0,
-          iconTheme: const IconThemeData(color: Colors.white),
+          iconTheme: IconThemeData(
+            color: Colors.white,
+            size: Responsive.textSize(24, context),
+          ),
         ),
         body: ListView(
           children: [
             // Profile Section
-            _buildSectionHeader("YOUR PROFILE", context),
+            _buildSectionHeader("YOUR PROFILE", context, isDarkMode),
             Card(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              // CHANGED: Black in dark mode, white in light mode
-              color: isDarkMode ? Colors.black.withOpacity(0.7) : Colors.white.withOpacity(0.9),
+              margin: EdgeInsets.symmetric(
+                horizontal: Responsive.width(4, context), 
+                vertical: Responsive.height(1, context)
+              ),
+              color: isDarkMode
+                  ? Colors.black.withOpacity(0.7)
+                  : Colors.white.withOpacity(0.9),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(
+                  Responsive.width(3, context),
+                ),
               ),
               child: ListTile(
-                leading: Icon(Icons.person, color: AppTheme.primaryCyan),
+                leading: Icon(
+                  Icons.person, 
+                  color: AppTheme.primaryCyan,
+                  size: Responsive.textSize(24, context),
+                ),
                 title: Text(
                   "Your Profile",
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     color: isDarkMode ? Colors.white : Colors.black,
+                    fontSize: Responsive.textSize(16, context),
                   ),
                 ),
                 subtitle: Text(
                   "Update your personal information",
                   style: TextStyle(
                     color: isDarkMode ? Colors.white70 : Colors.black54,
+                    fontSize: Responsive.textSize(14, context),
                   ),
                 ),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  size: 16,
+                  size: Responsive.textSize(16, context),
                   color: isDarkMode ? Colors.white70 : Colors.grey,
                 ),
                 onTap: () {
@@ -66,21 +88,32 @@ class SettingsScreen extends StatelessWidget {
             ),
 
             // Appearance Section
-            _buildSectionHeader("APPEARANCE", context),
+            _buildSectionHeader("APPEARANCE", context, isDarkMode),
             Card(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              // CHANGED: Black in dark mode, white in light mode
-              color: isDarkMode ? Colors.black.withOpacity(0.7) : Colors.white.withOpacity(0.9),
+              margin: EdgeInsets.symmetric(
+                horizontal: Responsive.width(4, context), 
+                vertical: Responsive.height(1, context)
+              ),
+              color: isDarkMode
+                  ? Colors.black.withOpacity(0.7)
+                  : Colors.white.withOpacity(0.9),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(
+                  Responsive.width(3, context),
+                ),
               ),
               child: ListTile(
-                leading: Icon(Icons.dark_mode, color: AppTheme.primaryCyan),
+                leading: Icon(
+                  Icons.dark_mode, 
+                  color: AppTheme.primaryCyan,
+                  size: Responsive.textSize(24, context),
+                ),
                 title: Text(
                   "Dark Mode",
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     color: isDarkMode ? Colors.white : Colors.black,
+                    fontSize: Responsive.textSize(16, context),
                   ),
                 ),
                 trailing: Switch(
@@ -94,13 +127,19 @@ class SettingsScreen extends StatelessWidget {
             ),
 
             // Data Management Section
-            _buildSectionHeader("DATA MANAGEMENT", context),
+            _buildSectionHeader("DATA MANAGEMENT", context, isDarkMode),
             Card(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              // CHANGED: Black in dark mode, white in light mode
-              color: isDarkMode ? Colors.black.withOpacity(0.7) : Colors.white.withOpacity(0.9),
+              margin: EdgeInsets.symmetric(
+                horizontal: Responsive.width(4, context), 
+                vertical: Responsive.height(1, context)
+              ),
+              color: isDarkMode
+                  ? Colors.black.withOpacity(0.7)
+                  : Colors.white.withOpacity(0.9),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(
+                  Responsive.width(3, context),
+                ),
               ),
               child: Column(
                 children: [
@@ -108,139 +147,82 @@ class SettingsScreen extends StatelessWidget {
                     leading: Icon(
                       Icons.delete_sweep,
                       color: isDarkMode ? Colors.red[300] : Colors.red,
+                      size: Responsive.textSize(24, context),
                     ),
                     title: Text(
                       "Clear All Tasks",
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: isDarkMode ? Colors.white : Colors.black,
+                        fontSize: Responsive.textSize(16, context),
                       ),
                     ),
                     subtitle: Text(
                       "Permanently delete all tasks",
                       style: TextStyle(
                         color: isDarkMode ? Colors.white70 : Colors.black54,
+                        fontSize: Responsive.textSize(14, context),
                       ),
                     ),
                     trailing: Icon(
                       Icons.warning,
                       color: isDarkMode ? Colors.red[300] : Colors.red,
+                      size: Responsive.textSize(24, context),
                     ),
-                    onTap: () async {
-                      final confirmed = await showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text("Clear All Tasks"),
-                          content: const Text(
-                            "Are you sure you want to delete all tasks? This action cannot be undone.",
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.of(context).pop(false),
-                              child: const Text("Cancel"),
-                            ),
-                            TextButton(
-                              onPressed: () => Navigator.of(context).pop(true),
-                              child: const Text(
-                                "Delete All",
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-
-                      if (confirmed == true) {
-                        final taskBox = Hive.box<Task>('tasks');
-                        await taskBox.clear();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("All tasks have been deleted"),
-                            duration: Duration(seconds: 2),
-                          ),
-                        );
-                      }
-                    },
+                    onTap: () => _showClearTasksConfirmation(context, isDarkMode),
                   ),
                   Divider(
                     height: 1,
-                    indent: 16,
-                    endIndent: 16,
+                    indent: Responsive.width(4, context),
+                    endIndent: Responsive.width(4, context),
                     color: isDarkMode ? Colors.white24 : Colors.black12,
                   ),
                   ListTile(
                     leading: Icon(
                       Icons.label_off,
                       color: isDarkMode ? Colors.red[300] : Colors.red,
+                      size: Responsive.textSize(24, context),
                     ),
                     title: Text(
                       "Clear All Tags",
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: isDarkMode ? Colors.white : Colors.black,
+                        fontSize: Responsive.textSize(16, context),
                       ),
                     ),
                     subtitle: Text(
                       "Permanently delete all tags",
                       style: TextStyle(
                         color: isDarkMode ? Colors.white70 : Colors.black54,
+                        fontSize: Responsive.textSize(14, context),
                       ),
                     ),
                     trailing: Icon(
                       Icons.warning,
                       color: isDarkMode ? Colors.red[300] : Colors.red,
+                      size: Responsive.textSize(24, context),
                     ),
-                    onTap: () async {
-                      final confirmed = await showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text("Clear All Tags"),
-                          content: const Text(
-                            "Are you sure you want to delete all tags? This action cannot be undone.",
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.of(context).pop(false),
-                              child: const Text("Cancel"),
-                            ),
-                            TextButton(
-                              onPressed: () => Navigator.of(context).pop(true),
-                              child: const Text(
-                                "Delete All",
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-
-                      if (confirmed == true) {
-                        final tagProvider = Provider.of<TagProvider>(
-                          context,
-                          listen: false,
-                        );
-                        await tagProvider.clearTags();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("All tags have been deleted"),
-                            duration: Duration(seconds: 2),
-                          ),
-                        );
-                      }
-                    },
+                    onTap: () => _showClearTagsConfirmation(context, isDarkMode),
                   ),
                 ],
               ),
             ),
 
             // Statistics Section
-            _buildSectionHeader("STATISTICS", context),
+            _buildSectionHeader("STATISTICS", context, isDarkMode),
             Card(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              // CHANGED: Black in dark mode, white in light mode
-              color: isDarkMode ? Colors.black.withOpacity(0.7) : Colors.white.withOpacity(0.9),
+              margin: EdgeInsets.symmetric(
+                horizontal: Responsive.width(4, context), 
+                vertical: Responsive.height(1, context)
+              ),
+              color: isDarkMode
+                  ? Colors.black.withOpacity(0.7)
+                  : Colors.white.withOpacity(0.9),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(
+                  Responsive.width(3, context),
+                ),
               ),
               child: ValueListenableBuilder(
                 valueListenable: Hive.box<Task>('tasks').listenable(),
@@ -262,11 +244,12 @@ class SettingsScreen extends StatelessWidget {
                         title: "Total Tasks",
                         value: "$totalTasks",
                         isDarkMode: isDarkMode,
+                        context: context,
                       ),
                       Divider(
                         height: 1,
-                        indent: 16,
-                        endIndent: 16,
+                        indent: Responsive.width(4, context),
+                        endIndent: Responsive.width(4, context),
                         color: isDarkMode ? Colors.white24 : Colors.black12,
                       ),
                       _buildStatTile(
@@ -275,11 +258,12 @@ class SettingsScreen extends StatelessWidget {
                         value: "$completedTasks",
                         color: Colors.green,
                         isDarkMode: isDarkMode,
+                        context: context,
                       ),
                       Divider(
                         height: 1,
-                        indent: 16,
-                        endIndent: 16,
+                        indent: Responsive.width(4, context),
+                        endIndent: Responsive.width(4, context),
                         color: isDarkMode ? Colors.white24 : Colors.black12,
                       ),
                       _buildStatTile(
@@ -288,11 +272,12 @@ class SettingsScreen extends StatelessWidget {
                         value: "$pendingTasks",
                         color: Colors.orange,
                         isDarkMode: isDarkMode,
+                        context: context,
                       ),
                       Divider(
                         height: 1,
-                        indent: 16,
-                        endIndent: 16,
+                        indent: Responsive.width(4, context),
+                        endIndent: Responsive.width(4, context),
                         color: isDarkMode ? Colors.white24 : Colors.black12,
                       ),
                       _buildStatTile(
@@ -303,6 +288,7 @@ class SettingsScreen extends StatelessWidget {
                           completionRate.toDouble(),
                         ),
                         isDarkMode: isDarkMode,
+                        context: context,
                       ),
                     ],
                   );
@@ -311,28 +297,39 @@ class SettingsScreen extends StatelessWidget {
             ),
 
             // App Information Section
-            _buildSectionHeader("APP INFORMATION", context),
+            _buildSectionHeader("APP INFORMATION", context, isDarkMode),
             Card(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              // CHANGED: Black in dark mode, white in light mode
-              color: isDarkMode ? Colors.black.withOpacity(0.7) : Colors.white.withOpacity(0.9),
+              margin: EdgeInsets.symmetric(
+                horizontal: Responsive.width(4, context), 
+                vertical: Responsive.height(1, context)
+              ),
+              color: isDarkMode
+                  ? Colors.black.withOpacity(0.7)
+                  : Colors.white.withOpacity(0.9),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(
+                  Responsive.width(3, context),
+                ),
               ),
               child: Column(
                 children: [
                   ListTile(
-                    leading: Icon(Icons.person, color: AppTheme.primaryCyan),
+                    leading: Icon(
+                      Icons.person, 
+                      color: AppTheme.primaryCyan,
+                      size: Responsive.textSize(24, context),
+                    ),
                     title: Text(
                       "Developer Info",
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: isDarkMode ? Colors.white : Colors.black,
+                        fontSize: Responsive.textSize(16, context),
                       ),
                     ),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
-                      size: 16,
+                      size: Responsive.textSize(16, context),
                       color: isDarkMode ? Colors.white70 : Colors.grey,
                     ),
                     onTap: () {
@@ -346,92 +343,60 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   Divider(
                     height: 1,
-                    indent: 16,
-                    endIndent: 16,
+                    indent: Responsive.width(4, context),
+                    endIndent: Responsive.width(4, context),
                     color: isDarkMode ? Colors.white24 : Colors.black12,
                   ),
                   ListTile(
-                    leading: Icon(Icons.info, color: AppTheme.primaryCyan),
+                    leading: Icon(
+                      Icons.info, 
+                      color: AppTheme.primaryCyan,
+                      size: Responsive.textSize(24, context),
+                    ),
                     title: Text(
                       "About App",
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: isDarkMode ? Colors.white : Colors.black,
+                        fontSize: Responsive.textSize(16, context),
                       ),
                     ),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
-                      size: 16,
+                      size: Responsive.textSize(16, context),
                       color: isDarkMode ? Colors.white70 : Colors.grey,
                     ),
                     onTap: () {
-                      showAboutDialog(
-                        context: context,
-                        applicationName: "ZenDo",
-                        applicationVersion: "1.0.0",
-                        applicationIcon: const Icon(
-                          Icons.checklist,
-                          size: 48,
-                          color: AppTheme.primaryCyan,
-                        ),
-                        children: [
-                          const SizedBox(height: 16),
-                          const Text(
-                            "A simple and smart todo app to help you organize your tasks efficiently. "
-                            "Stay productive and manage your daily tasks with ease!",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 14),
-                          ),
-                        ],
-                      );
+                      _showAboutDialog(context, isDarkMode);
                     },
                   ),
                   Divider(
                     height: 1,
-                    indent: 16,
-                    endIndent: 16,
+                    indent: Responsive.width(4, context),
+                    endIndent: Responsive.width(4, context),
                     color: isDarkMode ? Colors.white24 : Colors.black12,
                   ),
                   ListTile(
                     leading: Icon(
                       Icons.privacy_tip,
                       color: AppTheme.primaryCyan,
+                      size: Responsive.textSize(24, context),
                     ),
                     title: Text(
                       "Privacy Policy",
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: isDarkMode ? Colors.white : Colors.black,
+                        fontSize: Responsive.textSize(16, context),
                       ),
                     ),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
-                      size: 16,
+                      size: Responsive.textSize(16, context),
                       color: isDarkMode ? Colors.white70 : Colors.grey,
                     ),
                     onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text("Privacy Policy"),
-                          content: const SingleChildScrollView(
-                            child: Text(
-                              "ZenDo values your privacy. We don't collect any personal data. "
-                              "All your tasks and data are stored locally on your device.\n\n"
-                              "• No data collection\n"
-                              "• No third-party sharing\n"
-                              "• Your data stays on your device\n\n"
-                              "For any questions or concerns, please contact us at adnan02802@gmail.com",
-                            ),
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.of(context).pop(),
-                              child: const Text("OK"),
-                            ),
-                          ],
-                        ),
-                      );
+                      _showPrivacyPolicyDialog(context, isDarkMode);
                     },
                   ),
                 ],
@@ -439,12 +404,12 @@ class SettingsScreen extends StatelessWidget {
             ),
 
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(Responsive.width(4, context)),
               child: Text(
-                "ZenDo v1.0.0",
+                "ZenDo 1.1.0",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: Responsive.textSize(12, context),
                   color: Colors.white.withOpacity(0.8),
                 ),
               ),
@@ -455,20 +420,289 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionHeader(String title, BuildContext context) {
-    final isDarkMode = context.watch<ThemeProvider>().isDarkMode;
+  Future<void> _showClearTasksConfirmation(BuildContext context, bool isDarkMode) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => Theme(
+        data: Theme.of(context).copyWith(
+          dialogTheme: DialogThemeData(
+            backgroundColor: isDarkMode
+                ? Colors.grey[900]
+                : Colors.white,
+            titleTextStyle: TextStyle(
+              color: isDarkMode ? Colors.white : Colors.black,
+              fontSize: Responsive.textSize(20, context),
+              fontWeight: FontWeight.bold,
+            ),
+            contentTextStyle: TextStyle(
+              color: isDarkMode ? Colors.white70 : Colors.black87,
+              fontSize: Responsive.textSize(16, context),
+            ),
+          ),
+        ),
+        child: AlertDialog(
+          title: Text(
+            "Clear All Tasks",
+            style: TextStyle(
+              color: isDarkMode ? Colors.white : Colors.black,
+            ),
+          ),
+          content: Text(
+            "Are you sure you want to delete all tasks? This action cannot be undone.",
+            style: TextStyle(
+              fontSize: Responsive.textSize(16, context),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text(
+                "Cancel",
+                style: TextStyle(
+                  color: isDarkMode ? Colors.white70 : Colors.blue,
+                  fontSize: Responsive.textSize(16, context),
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text(
+                "Delete All",
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: Responsive.textSize(16, context),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
 
+    if (confirmed == true) {
+      final taskBox = Hive.box<Task>('tasks');
+      await taskBox.clear();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "All tasks have been deleted",
+            style: TextStyle(fontSize: Responsive.textSize(14, context)),
+          ),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  Future<void> _showClearTagsConfirmation(BuildContext context, bool isDarkMode) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => Theme(
+        data: Theme.of(context).copyWith(
+          dialogTheme: DialogThemeData(
+            backgroundColor: isDarkMode
+                ? Colors.grey[900]
+                : Colors.white,
+            titleTextStyle: TextStyle(
+              color: isDarkMode ? Colors.white : Colors.black,
+              fontSize: Responsive.textSize(20, context),
+              fontWeight: FontWeight.bold,
+            ),
+            contentTextStyle: TextStyle(
+              color: isDarkMode ? Colors.white70 : Colors.black87,
+              fontSize: Responsive.textSize(16, context),
+            ),
+          ),
+        ),
+        child: AlertDialog(
+          title: Text(
+            "Clear All Tags",
+            style: TextStyle(
+              color: isDarkMode ? Colors.white : Colors.black,
+            ),
+          ),
+          content: Text(
+            "Are you sure you want to delete all tags? This action cannot be undone.",
+            style: TextStyle(
+              fontSize: Responsive.textSize(16, context),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text(
+                "Cancel",
+                style: TextStyle(
+                  color: isDarkMode ? Colors.white70 : Colors.blue,
+                  fontSize: Responsive.textSize(16, context),
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text(
+                "Delete All",
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: Responsive.textSize(16, context),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    if (confirmed == true) {
+      final tagProvider = Provider.of<TagProvider>(
+        context,
+        listen: false,
+      );
+      await tagProvider.clearTags();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "All tags have been deleted",
+            style: TextStyle(fontSize: Responsive.textSize(14, context)),
+          ),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  void _showAboutDialog(BuildContext context, bool isDarkMode) {
+    showDialog(
+      context: context,
+      builder: (context) => Theme(
+        data: Theme.of(context).copyWith(
+          dialogTheme: DialogThemeData(
+            backgroundColor: isDarkMode
+                ? Colors.grey[900]
+                : Colors.white,
+            titleTextStyle: TextStyle(
+              color: isDarkMode ? Colors.white : Colors.black,
+              fontSize: Responsive.textSize(20, context),
+              fontWeight: FontWeight.bold,
+            ),
+            contentTextStyle: TextStyle(
+              color: isDarkMode ? Colors.white70 : Colors.black87,
+              fontSize: Responsive.textSize(14, context),
+            ),
+          ),
+        ),
+        child: AlertDialog(
+          title: Text(
+            "About ZenDo",
+            style: TextStyle(
+              color: isDarkMode ? Colors.white : Colors.black,
+            ),
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              children: [
+                Icon(
+                  Icons.checklist,
+                  size: Responsive.textSize(48, context),
+                  color: AppTheme.primaryCyan,
+                ),
+                SizedBox(height: Responsive.height(2, context)),
+                Text(
+                  "A simple and smart todo app to help you organize your tasks efficiently. "
+                  "Stay productive and manage your daily tasks with ease!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: Responsive.textSize(14, context),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(
+                "OK",
+                style: TextStyle(fontSize: Responsive.textSize(16, context)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showPrivacyPolicyDialog(BuildContext context, bool isDarkMode) {
+    showDialog(
+      context: context,
+      builder: (context) => Theme(
+        data: Theme.of(context).copyWith(
+          dialogTheme: DialogThemeData(
+            backgroundColor: isDarkMode
+                ? Colors.grey[900]
+                : Colors.white,
+            titleTextStyle: TextStyle(
+              color: isDarkMode ? Colors.white : Colors.black,
+              fontSize: Responsive.textSize(20, context),
+              fontWeight: FontWeight.bold,
+            ),
+            contentTextStyle: TextStyle(
+              color: isDarkMode ? Colors.white70 : Colors.black87,
+              fontSize: Responsive.textSize(14, context),
+            ),
+          ),
+        ),
+        child: AlertDialog(
+          title: Text(
+            "Privacy Policy",
+            style: TextStyle(
+              color: isDarkMode ? Colors.white : Colors.black,
+            ),
+          ),
+          content: SingleChildScrollView(
+            child: Text(
+              "ZenDo values your privacy. We don't collect any personal data. "
+              "All your tasks and data are stored locally on your device.\n\n"
+              "• No data collection\n"
+              "• No third-party sharing\n"
+              "• Your data stays on your device\n\n"
+              "For any questions or concerns, please contact us at adnan02802@gmail.com",
+              style: TextStyle(
+                fontSize: Responsive.textSize(14, context),
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(
+                "OK",
+                style: TextStyle(fontSize: Responsive.textSize(16, context)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSectionHeader(String title, BuildContext context, bool isDarkMode) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 20, 24, 8),
+      padding: EdgeInsets.fromLTRB(
+        Responsive.width(6, context),
+        Responsive.height(2.5, context),
+        Responsive.width(6, context),
+        Responsive.height(1, context),
+      ),
       child: Text(
         title,
         style: TextStyle(
-          fontSize: 12,
+          fontSize: Responsive.textSize(12, context),
           fontWeight: FontWeight.w600,
           color: isDarkMode ? Colors.white70 : Colors.black54,
           letterSpacing: 1.2,
         ),
-      )
+      ),
     );
   }
 
@@ -478,20 +712,25 @@ class SettingsScreen extends StatelessWidget {
     required String value,
     Color color = Colors.black,
     required bool isDarkMode,
+    required BuildContext context,
   }) {
     return ListTile(
-      leading: Icon(icon, color: color),
+      leading: Icon(
+        icon, 
+        color: color,
+        size: Responsive.textSize(24, context),
+      ),
       title: Text(
         title,
         style: TextStyle(
-          fontSize: 14,
+          fontSize: Responsive.textSize(14, context),
           color: isDarkMode ? Colors.white : Colors.black,
         ),
       ),
       trailing: Text(
         value,
         style: TextStyle(
-          fontSize: 16,
+          fontSize: Responsive.textSize(16, context),
           fontWeight: FontWeight.bold,
           color: color,
         ),

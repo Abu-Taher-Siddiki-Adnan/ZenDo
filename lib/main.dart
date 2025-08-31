@@ -17,6 +17,8 @@ void main() async {
 
   try {
     await NotificationService.init();
+    await checkFirstLaunchAndRequestPermission();
+
 
     final appDocDir = await getApplicationDocumentsDirectory();
     await Hive.initFlutter(appDocDir.path);
@@ -55,6 +57,17 @@ void main() async {
   }
 }
 
+Future<void> checkFirstLaunchAndRequestPermission() async {
+  final prefs = await SharedPreferences.getInstance();
+  final isFirstLaunch = prefs.getBool('is_first_launch') ?? true;
+
+  if (isFirstLaunch) {
+    final granted = await NotificationService.requestNotificationPermission();
+    print(granted ? 'Notification permission granted' : 'Notification permission denied');
+    await prefs.setBool('is_first_launch', false);
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -63,7 +76,7 @@ class MyApp extends StatelessWidget {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
         return MaterialApp(
-          title: "TaskFlow",
+          title: "ZenDo",
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,

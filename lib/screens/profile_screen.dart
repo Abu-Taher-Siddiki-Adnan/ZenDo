@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ZenDo/models/user.dart';
 import 'package:hive/hive.dart';
 import 'package:ZenDo/theme/app_theme.dart';
+import 'package:ZenDo/utils/responsive.dart'; 
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -62,7 +63,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       box.put('current_user', newUser);
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Profile saved successfully!')),
+        SnackBar(
+          content: Text(
+            'Profile saved successfully!',
+            style: TextStyle(fontSize: Responsive.textSize(14, context)),
+          ),
+        ),
       );
 
       Navigator.pop(context);
@@ -76,13 +82,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: const Text('Your Profile'),
+          title: Text(
+            'Your Profile',
+            style: TextStyle(fontSize: Responsive.textSize(18, context)),
+          ),
           actions: [
-            IconButton(icon: const Icon(Icons.save), onPressed: _saveProfile),
+            IconButton(
+              icon: Icon(Icons.save, size: Responsive.textSize(24, context)),
+              onPressed: _saveProfile,
+            ),
           ],
         ),
         body: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(Responsive.width(5, context)),
           child: Form(
             key: _formKey,
             child: ListView(
@@ -91,23 +103,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: GestureDetector(
                     onTap: _pickImage,
                     child: CircleAvatar(
-                      radius: 50,
+                      radius: Responsive.width(12, context),
                       backgroundImage: _profileImagePath != null
                           ? FileImage(File(_profileImagePath!))
                           : null,
                       child: _profileImagePath == null
-                          ? const Icon(Icons.add_a_photo, size: 30)
+                          ? Icon(
+                              Icons.add_a_photo,
+                              size: Responsive.textSize(30, context),
+                            )
                           : null,
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: Responsive.height(2.5, context)),
                 TextFormField(
                   controller: _nameController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Your Name',
-                    prefixIcon: Icon(Icons.person),
+                    prefixIcon: Icon(
+                      Icons.person,
+                      size: Responsive.textSize(24, context),
+                    ),
+                    labelStyle: TextStyle(
+                      fontSize: Responsive.textSize(16, context),
+                    ),
                   ),
+                  style: TextStyle(fontSize: Responsive.textSize(16, context)),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your name';
@@ -115,13 +137,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: Responsive.height(2, context)),
                 TextFormField(
                   controller: _emailController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Email',
-                    prefixIcon: Icon(Icons.email),
+                    prefixIcon: Icon(
+                      Icons.email,
+                      size: Responsive.textSize(24, context),
+                    ),
+                    labelStyle: TextStyle(
+                      fontSize: Responsive.textSize(16, context),
+                    ),
                   ),
+                  style: TextStyle(fontSize: Responsive.textSize(16, context)),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -133,10 +162,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: Responsive.height(3.5, context)),
                 ElevatedButton(
                   onPressed: _saveProfile,
-                  child: const Text('Save Profile'),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(
+                      vertical: Responsive.height(2, context),
+                    ),
+                  ),
+                  child: Text(
+                    'Save Profile',
+                    style: TextStyle(
+                      fontSize: Responsive.textSize(16, context),
+                    ),
+                  ),
                 ),
               ],
             ),

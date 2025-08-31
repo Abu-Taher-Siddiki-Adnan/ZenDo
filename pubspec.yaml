@@ -5,7 +5,7 @@ description: "A beautiful and smart task management app to organize your daily l
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 
-version: 1.0.0+1
+version: 1.1.0+2
 
 environment:
   sdk: ^3.8.1
@@ -18,7 +18,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   path_provider: ^2.0.14
-  flutter_local_notifications: 19.4.1
+  flutter_local_notifications: ^19.4.1
   timezone: ^0.10.1
   shared_preferences: ^2.5.3
   provider: ^6.1.5+1
@@ -26,6 +26,9 @@ dependencies:
   url_launcher: ^6.3.2
   image_picker: ^1.2.0
   flutter_launcher_icons: ^0.14.4
+  flutter_timezone: ^4.1.1
+  permission_handler: ^12.0.1
+  device_info_plus: ^11.5.0
 
 
 
