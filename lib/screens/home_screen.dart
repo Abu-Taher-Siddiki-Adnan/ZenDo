@@ -8,6 +8,7 @@ import 'add_task_screen.dart';
 import 'package:ZenDo/models/user.dart';
 import 'package:ZenDo/theme/app_theme.dart';
 import 'package:ZenDo/utils/responsive.dart';
+import 'package:ZenDo/services/notification_service.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -155,7 +156,9 @@ class HomeScreen extends StatelessWidget {
                       },
                     );
                   },
-                  onDismissed: (direction) {
+                  onDismissed: (direction) async {
+                    await NotificationService.cancelNotification(task.id);
+
                     box.deleteAt(index);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Deleted ${task.title}")),

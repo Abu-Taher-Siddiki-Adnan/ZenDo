@@ -16,7 +16,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     ndkVersion = "27.0.12077973"
-    namespace = "com.example.smart2do"
+    namespace = "com.adnan.zendo"  // ← CHANGED THIS
     compileSdk = flutter.compileSdkVersion
     // ndkVersion = flutter.ndkVersion
 
@@ -33,13 +33,13 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.smart2do"
+        applicationId = "com.adnan.zendo"  // ← CHANGED THIS
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+        versionCode = 2  // ← INCREMENTED THIS (must be higher than previous)
+        versionName = "1.1.0"  // ← UPDATED VERSION
     }
 
     signingConfigs {

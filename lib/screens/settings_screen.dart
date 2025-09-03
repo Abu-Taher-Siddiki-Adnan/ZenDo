@@ -7,7 +7,8 @@ import 'package:ZenDo/models/task.dart';
 import 'package:ZenDo/theme/app_theme.dart';
 import 'developer_screen.dart';
 import 'profile_screen.dart';
-import 'package:ZenDo/utils/responsive.dart'; 
+import 'package:ZenDo/utils/responsive.dart';
+import 'package:ZenDo/services/notification_service.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -22,11 +23,11 @@ class SettingsScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text(
-            "Settings", 
+            "Settings",
             style: TextStyle(
               color: Colors.white,
               fontSize: Responsive.textSize(18, context),
-            )
+            ),
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -41,8 +42,8 @@ class SettingsScreen extends StatelessWidget {
             _buildSectionHeader("YOUR PROFILE", context, isDarkMode),
             Card(
               margin: EdgeInsets.symmetric(
-                horizontal: Responsive.width(4, context), 
-                vertical: Responsive.height(1, context)
+                horizontal: Responsive.width(4, context),
+                vertical: Responsive.height(1, context),
               ),
               color: isDarkMode
                   ? Colors.black.withOpacity(0.7)
@@ -54,7 +55,7 @@ class SettingsScreen extends StatelessWidget {
               ),
               child: ListTile(
                 leading: Icon(
-                  Icons.person, 
+                  Icons.person,
                   color: AppTheme.primaryCyan,
                   size: Responsive.textSize(24, context),
                 ),
@@ -91,8 +92,8 @@ class SettingsScreen extends StatelessWidget {
             _buildSectionHeader("APPEARANCE", context, isDarkMode),
             Card(
               margin: EdgeInsets.symmetric(
-                horizontal: Responsive.width(4, context), 
-                vertical: Responsive.height(1, context)
+                horizontal: Responsive.width(4, context),
+                vertical: Responsive.height(1, context),
               ),
               color: isDarkMode
                   ? Colors.black.withOpacity(0.7)
@@ -104,7 +105,7 @@ class SettingsScreen extends StatelessWidget {
               ),
               child: ListTile(
                 leading: Icon(
-                  Icons.dark_mode, 
+                  Icons.dark_mode,
                   color: AppTheme.primaryCyan,
                   size: Responsive.textSize(24, context),
                 ),
@@ -130,8 +131,8 @@ class SettingsScreen extends StatelessWidget {
             _buildSectionHeader("DATA MANAGEMENT", context, isDarkMode),
             Card(
               margin: EdgeInsets.symmetric(
-                horizontal: Responsive.width(4, context), 
-                vertical: Responsive.height(1, context)
+                horizontal: Responsive.width(4, context),
+                vertical: Responsive.height(1, context),
               ),
               color: isDarkMode
                   ? Colors.black.withOpacity(0.7)
@@ -169,7 +170,8 @@ class SettingsScreen extends StatelessWidget {
                       color: isDarkMode ? Colors.red[300] : Colors.red,
                       size: Responsive.textSize(24, context),
                     ),
-                    onTap: () => _showClearTasksConfirmation(context, isDarkMode),
+                    onTap: () =>
+                        _showClearTasksConfirmation(context, isDarkMode),
                   ),
                   Divider(
                     height: 1,
@@ -203,7 +205,8 @@ class SettingsScreen extends StatelessWidget {
                       color: isDarkMode ? Colors.red[300] : Colors.red,
                       size: Responsive.textSize(24, context),
                     ),
-                    onTap: () => _showClearTagsConfirmation(context, isDarkMode),
+                    onTap: () =>
+                        _showClearTagsConfirmation(context, isDarkMode),
                   ),
                 ],
               ),
@@ -213,8 +216,8 @@ class SettingsScreen extends StatelessWidget {
             _buildSectionHeader("STATISTICS", context, isDarkMode),
             Card(
               margin: EdgeInsets.symmetric(
-                horizontal: Responsive.width(4, context), 
-                vertical: Responsive.height(1, context)
+                horizontal: Responsive.width(4, context),
+                vertical: Responsive.height(1, context),
               ),
               color: isDarkMode
                   ? Colors.black.withOpacity(0.7)
@@ -300,8 +303,8 @@ class SettingsScreen extends StatelessWidget {
             _buildSectionHeader("APP INFORMATION", context, isDarkMode),
             Card(
               margin: EdgeInsets.symmetric(
-                horizontal: Responsive.width(4, context), 
-                vertical: Responsive.height(1, context)
+                horizontal: Responsive.width(4, context),
+                vertical: Responsive.height(1, context),
               ),
               color: isDarkMode
                   ? Colors.black.withOpacity(0.7)
@@ -315,7 +318,7 @@ class SettingsScreen extends StatelessWidget {
                 children: [
                   ListTile(
                     leading: Icon(
-                      Icons.person, 
+                      Icons.person,
                       color: AppTheme.primaryCyan,
                       size: Responsive.textSize(24, context),
                     ),
@@ -349,7 +352,7 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   ListTile(
                     leading: Icon(
-                      Icons.info, 
+                      Icons.info,
                       color: AppTheme.primaryCyan,
                       size: Responsive.textSize(24, context),
                     ),
@@ -420,15 +423,16 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _showClearTasksConfirmation(BuildContext context, bool isDarkMode) async {
+  Future<void> _showClearTasksConfirmation(
+    BuildContext context,
+    bool isDarkMode,
+  ) async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => Theme(
         data: Theme.of(context).copyWith(
           dialogTheme: DialogThemeData(
-            backgroundColor: isDarkMode
-                ? Colors.grey[900]
-                : Colors.white,
+            backgroundColor: isDarkMode ? Colors.grey[900] : Colors.white,
             titleTextStyle: TextStyle(
               color: isDarkMode ? Colors.white : Colors.black,
               fontSize: Responsive.textSize(20, context),
@@ -443,15 +447,11 @@ class SettingsScreen extends StatelessWidget {
         child: AlertDialog(
           title: Text(
             "Clear All Tasks",
-            style: TextStyle(
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
+            style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
           ),
           content: Text(
             "Are you sure you want to delete all tasks? This action cannot be undone.",
-            style: TextStyle(
-              fontSize: Responsive.textSize(16, context),
-            ),
+            style: TextStyle(fontSize: Responsive.textSize(16, context)),
           ),
           actions: [
             TextButton(
@@ -481,6 +481,9 @@ class SettingsScreen extends StatelessWidget {
 
     if (confirmed == true) {
       final taskBox = Hive.box<Task>('tasks');
+
+      await NotificationService.cancelAllNotifications();
+
       await taskBox.clear();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -494,15 +497,16 @@ class SettingsScreen extends StatelessWidget {
     }
   }
 
-  Future<void> _showClearTagsConfirmation(BuildContext context, bool isDarkMode) async {
+  Future<void> _showClearTagsConfirmation(
+    BuildContext context,
+    bool isDarkMode,
+  ) async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => Theme(
         data: Theme.of(context).copyWith(
           dialogTheme: DialogThemeData(
-            backgroundColor: isDarkMode
-                ? Colors.grey[900]
-                : Colors.white,
+            backgroundColor: isDarkMode ? Colors.grey[900] : Colors.white,
             titleTextStyle: TextStyle(
               color: isDarkMode ? Colors.white : Colors.black,
               fontSize: Responsive.textSize(20, context),
@@ -517,15 +521,11 @@ class SettingsScreen extends StatelessWidget {
         child: AlertDialog(
           title: Text(
             "Clear All Tags",
-            style: TextStyle(
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
+            style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
           ),
           content: Text(
             "Are you sure you want to delete all tags? This action cannot be undone.",
-            style: TextStyle(
-              fontSize: Responsive.textSize(16, context),
-            ),
+            style: TextStyle(fontSize: Responsive.textSize(16, context)),
           ),
           actions: [
             TextButton(
@@ -554,10 +554,7 @@ class SettingsScreen extends StatelessWidget {
     );
 
     if (confirmed == true) {
-      final tagProvider = Provider.of<TagProvider>(
-        context,
-        listen: false,
-      );
+      final tagProvider = Provider.of<TagProvider>(context, listen: false);
       await tagProvider.clearTags();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -577,9 +574,7 @@ class SettingsScreen extends StatelessWidget {
       builder: (context) => Theme(
         data: Theme.of(context).copyWith(
           dialogTheme: DialogThemeData(
-            backgroundColor: isDarkMode
-                ? Colors.grey[900]
-                : Colors.white,
+            backgroundColor: isDarkMode ? Colors.grey[900] : Colors.white,
             titleTextStyle: TextStyle(
               color: isDarkMode ? Colors.white : Colors.black,
               fontSize: Responsive.textSize(20, context),
@@ -594,9 +589,7 @@ class SettingsScreen extends StatelessWidget {
         child: AlertDialog(
           title: Text(
             "About ZenDo",
-            style: TextStyle(
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
+            style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
           ),
           content: SingleChildScrollView(
             child: Column(
@@ -611,9 +604,7 @@ class SettingsScreen extends StatelessWidget {
                   "A simple and smart todo app to help you organize your tasks efficiently. "
                   "Stay productive and manage your daily tasks with ease!",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: Responsive.textSize(14, context),
-                  ),
+                  style: TextStyle(fontSize: Responsive.textSize(14, context)),
                 ),
               ],
             ),
@@ -638,9 +629,7 @@ class SettingsScreen extends StatelessWidget {
       builder: (context) => Theme(
         data: Theme.of(context).copyWith(
           dialogTheme: DialogThemeData(
-            backgroundColor: isDarkMode
-                ? Colors.grey[900]
-                : Colors.white,
+            backgroundColor: isDarkMode ? Colors.grey[900] : Colors.white,
             titleTextStyle: TextStyle(
               color: isDarkMode ? Colors.white : Colors.black,
               fontSize: Responsive.textSize(20, context),
@@ -655,9 +644,7 @@ class SettingsScreen extends StatelessWidget {
         child: AlertDialog(
           title: Text(
             "Privacy Policy",
-            style: TextStyle(
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
+            style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
           ),
           content: SingleChildScrollView(
             child: Text(
@@ -667,9 +654,7 @@ class SettingsScreen extends StatelessWidget {
               "• No third-party sharing\n"
               "• Your data stays on your device\n\n"
               "For any questions or concerns, please contact us at adnan02802@gmail.com",
-              style: TextStyle(
-                fontSize: Responsive.textSize(14, context),
-              ),
+              style: TextStyle(fontSize: Responsive.textSize(14, context)),
             ),
           ),
           actions: [
@@ -686,7 +671,11 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionHeader(String title, BuildContext context, bool isDarkMode) {
+  Widget _buildSectionHeader(
+    String title,
+    BuildContext context,
+    bool isDarkMode,
+  ) {
     return Padding(
       padding: EdgeInsets.fromLTRB(
         Responsive.width(6, context),
@@ -715,11 +704,7 @@ class SettingsScreen extends StatelessWidget {
     required BuildContext context,
   }) {
     return ListTile(
-      leading: Icon(
-        icon, 
-        color: color,
-        size: Responsive.textSize(24, context),
-      ),
+      leading: Icon(icon, color: color, size: Responsive.textSize(24, context)),
       title: Text(
         title,
         style: TextStyle(
