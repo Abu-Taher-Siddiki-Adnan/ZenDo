@@ -1,8 +1,4 @@
 import 'dart:io';
-<<<<<<< HEAD
-import 'package:flutter/foundation.dart';
-=======
->>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -12,14 +8,6 @@ class NotificationService {
       FlutterLocalNotificationsPlugin();
 
   static Future<void> init() async {
-<<<<<<< HEAD
-    if (kIsWeb || Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-      print('Notifications are not supported on this platform');
-      return;
-    }
-
-=======
->>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
     tz.initializeTimeZones();
     tz.setLocalLocation(tz.getLocation('Asia/Dhaka'));
 
@@ -31,12 +19,6 @@ class NotificationService {
           requestAlertPermission: true,
           requestBadgePermission: true,
           requestSoundPermission: true,
-<<<<<<< HEAD
-          defaultPresentAlert: true,
-          defaultPresentBadge: true,
-          defaultPresentSound: true,
-=======
->>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
         );
 
     const InitializationSettings settings = InitializationSettings(
@@ -75,13 +57,6 @@ class NotificationService {
 
   static Future<void> _requestPermissions() async {
     if (Platform.isIOS) {
-<<<<<<< HEAD
-      await _notificationsPlugin
-          .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin
-          >()
-          ?.requestPermissions(alert: true, badge: true, sound: true);
-=======
       final IOSFlutterLocalNotificationsPlugin? iosImplementation =
           _notificationsPlugin
               .resolvePlatformSpecificImplementation<
@@ -93,7 +68,6 @@ class NotificationService {
         badge: true,
         sound: true,
       );
->>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
     }
   }
 
@@ -103,14 +77,6 @@ class NotificationService {
     required String body,
     required DateTime scheduledTime,
   }) async {
-<<<<<<< HEAD
-    if (kIsWeb || Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-      print('Scheduling notifications is not supported on this platform');
-      return;
-    }
-
-=======
->>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
     try {
       const AndroidNotificationDetails androidDetails =
           AndroidNotificationDetails(
@@ -171,14 +137,6 @@ class NotificationService {
     required String title,
     required String body,
   }) async {
-<<<<<<< HEAD
-    if (kIsWeb || Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-      print('Instant notifications are not supported on this platform');
-      return;
-    }
-
-=======
->>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
     const AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(
           'task_channel',
@@ -203,14 +161,6 @@ class NotificationService {
   }
 
   static Future<bool> areNotificationsEnabled() async {
-<<<<<<< HEAD
-    if (kIsWeb || Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-      print('Checking notification status is not supported on this platform');
-      return false;
-    }
-
-=======
->>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
     if (Platform.isAndroid) {
       final bool? result = await _notificationsPlugin
           .resolvePlatformSpecificImplementation<
@@ -219,31 +169,12 @@ class NotificationService {
           ?.areNotificationsEnabled();
       return result ?? false;
     } else if (Platform.isIOS) {
-<<<<<<< HEAD
-      final NotificationsEnabledOptions? result = await _notificationsPlugin
-          .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin
-          >()
-          ?.checkPermissions();
-      return result?.isEnabled ?? false;
-=======
       return true;
->>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
     }
     return false;
   }
 
   static Future<bool> requestNotificationPermission() async {
-<<<<<<< HEAD
-    if (kIsWeb || Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-      print(
-        'Requesting notification permission is not supported on this platform',
-      );
-      return false;
-    }
-
-=======
->>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
     if (Platform.isAndroid) {
       final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
           _notificationsPlugin
@@ -255,14 +186,6 @@ class NotificationService {
           ?.requestNotificationsPermission();
       return granted ?? false;
     } else if (Platform.isIOS) {
-<<<<<<< HEAD
-      final bool? granted = await _notificationsPlugin
-          .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin
-          >()
-          ?.requestPermissions(alert: true, badge: true, sound: true);
-      return granted ?? false;
-=======
       final IOSFlutterLocalNotificationsPlugin? iosImplementation =
           _notificationsPlugin
               .resolvePlatformSpecificImplementation<
@@ -270,20 +193,11 @@ class NotificationService {
               >();
 
       return true;
->>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
     }
     return false;
   }
 
   static Future<void> cancelNotification(int id) async {
-<<<<<<< HEAD
-    if (kIsWeb || Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-      print('Cancelling notifications is not supported on this platform');
-      return;
-    }
-
-=======
->>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
     try {
       await _notificationsPlugin.cancel(id);
       print('Notification cancelled with ID: $id');
@@ -293,14 +207,6 @@ class NotificationService {
   }
 
   static Future<void> cancelAllNotifications() async {
-<<<<<<< HEAD
-    if (kIsWeb || Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-      print('Cancelling all notifications is not supported on this platform');
-      return;
-    }
-
-=======
->>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
     try {
       await _notificationsPlugin.cancelAll();
       print('All notifications cancelled');

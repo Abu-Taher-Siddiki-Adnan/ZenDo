@@ -7,10 +7,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   flutter_timezone
   permission_handler_windows
   url_launcher_windows
-<<<<<<< HEAD
   win_toast
-=======
->>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
