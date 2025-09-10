@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
     "name": "zendo",
     "short_name": "zendo",
+=======
+    "name": "smart2do",
+    "short_name": "smart2do",
+>>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

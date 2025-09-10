@@ -27,7 +27,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   FlutterWindow window(project);
   Win32Window::Point origin(10, 10);
   Win32Window::Size size(1280, 720);
+<<<<<<< HEAD
   if (!window.Create(L"zendo", origin, size)) {
+=======
+  if (!window.Create(L"smart2do", origin, size)) {
+>>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
     return EXIT_FAILURE;
   }
   window.SetQuitOnClose(true);

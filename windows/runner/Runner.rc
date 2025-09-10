@@ -89,6 +89,7 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
+<<<<<<< HEAD
             VALUE "CompanyName", "com.adnan" "\0"
             VALUE "FileDescription", "zendo" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
@@ -96,6 +97,15 @@ BEGIN
             VALUE "LegalCopyright", "Copyright (C) 2025 com.adnan. All rights reserved." "\0"
             VALUE "OriginalFilename", "zendo.exe" "\0"
             VALUE "ProductName", "zendo" "\0"
+=======
+            VALUE "CompanyName", "com.example" "\0"
+            VALUE "FileDescription", "smart2do" "\0"
+            VALUE "FileVersion", VERSION_AS_STRING "\0"
+            VALUE "InternalName", "smart2do" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
+            VALUE "OriginalFilename", "smart2do.exe" "\0"
+            VALUE "ProductName", "smart2do" "\0"
+>>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

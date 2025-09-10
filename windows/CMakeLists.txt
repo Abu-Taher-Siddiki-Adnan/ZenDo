@@ -1,10 +1,18 @@
 # Project-level configuration.
 cmake_minimum_required(VERSION 3.14)
+<<<<<<< HEAD
 project(zendo LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
 set(BINARY_NAME "zendo")
+=======
+project(smart2do LANGUAGES CXX)
+
+# The name of the executable created for the application. Change this to change
+# the on-disk name of your application.
+set(BINARY_NAME "smart2do")
+>>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.
