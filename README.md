@@ -30,7 +30,6 @@ A **Flutter-based To-Do List App** designed to help users organize tasks and boo
 
 ---
 
-<<<<<<< HEAD
 ## 📥 Download APK  
 
 You can download the **latest Android APK** of ZenDo here:  
@@ -43,8 +42,7 @@ You can download the **latest Android APK** of ZenDo here:
 - **Android:** [Download APK](https://github.com/Abu-Taher-Siddiki-Adnan/ZenDo/releases/download/v1.1.0/app-release.apk)
 
 ### Previous Version (v1.0.0)  
-- [Download v1.0.0](https://github.com/Abu-Taher-Siddiki-Adnan/ZenDo/releases/download/v1.0.0/app-release.apk) 
->>>>>>> 7cc58fbed4ff8c6d125cde0ad0777e420deea963
+- **Android:** [Download v1.0.0](https://github.com/Abu-Taher-Siddiki-Adnan/ZenDo/releases/download/v1.0.0/app-release.apk) 
 
 > ⚠️ Make sure to enable **“Install from Unknown Sources”** on your Android device before installing the APK.  
 
